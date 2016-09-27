@@ -12,17 +12,16 @@ class GroupsController < ApplicationController
    end
    def edit
    end
- end
+
  def create
  @group = Group.new(group_params)
- 
-
- if @group.save
+ @group.user = current_user
+   if @group.save
    redirect_to groups_path
- else
+   else
    render :new
- end
-end
+   end
+  end
 
   def update
 if @group.update(group_params)
@@ -47,3 +46,4 @@ end
   def group_params
     params.require(:group).permit(:title, :description)
   end
+end
